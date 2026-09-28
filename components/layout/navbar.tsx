@@ -1,14 +1,15 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
-import { navItems, siteConfig } from "@/lib/constants/site";
+import { navItems, siteConfig } from "@/data/site-config";
 
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [activeSection, setActiveSection] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -16,38 +17,21 @@ export function Navbar() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  useEffect(() => {
-    const ids = navItems.map((i) => i.href.replace("#", ""));
-    const observers: IntersectionObserver[] = [];
-    ids.forEach((id) => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      const obs = new IntersectionObserver(
-        ([e]) => {
-          if (e.isIntersecting) setActiveSection(id);
-        },
-        { rootMargin: "-40% 0px -55% 0px" }
-      );
-      obs.observe(el);
-      observers.push(obs);
-    });
-    return () => observers.forEach((o) => o.disconnect());
-  }, []);
-
   return (
     <header
       className={`sticky top-0 z-50 transition-all duration-300 ${
         scrolled
           ? "border-b border-emerald-900/30 bg-slate-950/90 shadow-xl shadow-black/40 backdrop-blur-md"
-          : "border-b border-transparent bg-slate-950/70 backdrop-blur-sm"
+          : "border-b border-slate-800/40 bg-slate-950/75 backdrop-blur-sm"
       }`}
     >
-    
+      {/* Microsoft 4-Color Accent Strip */}
+      <div className="h-1 w-full bg-gradient-to-r from-[#f25022] via-[#ffb900] via-[#7fba00] via-[#00a4ef] to-[#7719aa]" />
 
       <nav className="flex w-full items-center justify-between px-6 py-3.5 sm:px-10 lg:px-14 xl:px-16 2xl:px-20">
         {/* Brand Logo */}
         <Link
-          href="#home"
+          href="/"
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
@@ -67,15 +51,17 @@ export function Navbar() {
         {/* Desktop Nav Links */}
         <ul className="hidden items-center gap-1 md:flex">
           {navItems.map((item) => {
-            const id = item.href.replace("#", "");
-            const isActive = activeSection === id;
+            const isActive =
+              item.href === "/"
+                ? pathname === "/"
+                : pathname.startsWith(item.href);
             return (
               <li key={item.href}>
                 <Link
                   href={item.href}
                   className={`relative rounded-lg px-3.5 py-1.5 text-sm font-semibold transition-all duration-200 ${
                     isActive
-                      ? "text-emerald-400"
+                      ? "text-emerald-400 bg-emerald-500/10"
                       : "text-slate-300 hover:bg-slate-900/80 hover:text-white"
                   }`}
                 >
@@ -92,10 +78,10 @@ export function Navbar() {
         {/* Contact CTA & Mobile Hamburger */}
         <div className="flex items-center gap-3">
           <Link
-            href="#contact"
+            href="/contact"
             className="hidden rounded-full bg-gradient-to-r from-emerald-600 to-emerald-500 px-5 py-2 text-sm font-bold text-white shadow-md shadow-emerald-950/40 transition-all duration-200 hover:scale-105 hover:from-emerald-500 hover:to-emerald-400 md:block"
           >
-            Contact Me
+            Start a Project
           </Link>
 
           <button
@@ -122,8 +108,6 @@ export function Navbar() {
           </button>
         </div>
       </nav>
-        {/* Microsoft 4-Color Accent Strip */}
-      <div className="h-1 w-full bg-gradient-to-r from-[#f25022] via-[#ffb900] via-[#7fba00] via-[#00a4ef] to-[#7719aa]" />
 
       {/* Mobile Drawer */}
       <div
@@ -145,11 +129,11 @@ export function Navbar() {
           ))}
           <li className="pt-2">
             <Link
-              href="#contact"
+              href="/contact"
               onClick={() => setMenuOpen(false)}
               className="block rounded-xl bg-gradient-to-r from-emerald-600 to-emerald-500 py-2.5 text-center text-sm font-bold text-white shadow-md shadow-emerald-950/40"
             >
-              Contact Me
+              Start a Project
             </Link>
           </li>
         </ul>

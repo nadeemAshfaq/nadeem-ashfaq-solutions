@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
-import { services } from "@/features/portfolio/data/portfolio-data";
-import { siteConfig } from "@/lib/constants/site";
+import { servicesData } from "@/data/services-data";
+import { siteConfig } from "@/data/site-config";
 
 import "./globals.css";
 
@@ -81,10 +81,10 @@ const structuredData = {
       description: siteConfig.headline,
       publisher: { "@id": personId }
     },
-    ...services.map((service) => ({
+    ...servicesData.map((service) => ({
       "@type": "Service",
       name: service.title,
-      description: service.description,
+      description: service.shortDescription,
       provider: { "@id": personId }
     }))
   ]

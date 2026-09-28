@@ -1,4 +1,7 @@
-import { siteConfig } from "@/lib/constants/site";
+import Link from "next/link";
+
+import { servicesData } from "@/data/services-data";
+import { siteConfig } from "@/data/site-config";
 
 export function Footer() {
   return (
@@ -6,10 +9,10 @@ export function Footer() {
       {/* Top Emerald Gradient Line */}
       <div className="h-px w-full bg-gradient-to-r from-transparent via-emerald-500/40 to-transparent" />
 
-      <div className="w-full px-6 py-12 sm:px-10 lg:px-14 xl:px-16 2xl:px-20">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="w-full px-6 py-14 sm:px-10 lg:px-14 xl:px-16 2xl:px-20">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           {/* Brand */}
-          <div className="space-y-3">
+          <div className="space-y-3 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3">
               <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-black text-white shadow-md shadow-emerald-500/20">
                 N
@@ -19,33 +22,75 @@ export function Footer() {
             <p className="text-sm font-semibold text-emerald-400">{siteConfig.role}</p>
             <p className="text-xs text-slate-300">{siteConfig.subRole}</p>
             <p className="text-xs text-slate-400">
-              Available for full-time roles, contract consulting, and enterprise architecture.
+              Architecting production web platforms, custom Microsoft 365 solutions, Google Workspace add-ons, and AI automation.
             </p>
           </div>
 
-          {/* Quick Links */}
+          {/* Core Services (Internal SEO Links) */}
           <div className="space-y-4">
             <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-              Navigation
+              Specialized Services
             </p>
-            <ul className="space-y-2.5">
-              {["About", "Skills", "Services", "Projects", "Contact"].map((label) => (
-                <li key={label}>
-                  <a
-                    href={`#${label.toLowerCase()}`}
-                    className="text-sm font-medium text-slate-300 transition-colors hover:text-emerald-400"
+            <ul className="space-y-2 text-xs">
+              {servicesData.slice(0, 5).map((service) => (
+                <li key={service.slug}>
+                  <Link
+                    href={`/services/${service.slug}`}
+                    className="text-slate-300 transition-colors hover:text-emerald-400"
                   >
-                    {label}
-                  </a>
+                    {service.title}
+                  </Link>
                 </li>
               ))}
+              <li>
+                <Link
+                  href="/services"
+                  className="font-semibold text-emerald-400 hover:text-emerald-300"
+                >
+                  View All Services →
+                </Link>
+              </li>
             </ul>
           </div>
 
-          {/* Direct Inquiries */}
+          {/* Navigation */}
           <div className="space-y-4">
             <p className="text-xs font-bold uppercase tracking-wider text-blue-400">
-              Direct Contact
+              Navigation
+            </p>
+            <ul className="space-y-2.5 text-sm">
+              <li>
+                <Link href="/" className="text-slate-300 transition-colors hover:text-emerald-400">
+                  Home
+                </Link>
+              </li>
+              <li>
+                <Link href="/services" className="text-slate-300 transition-colors hover:text-emerald-400">
+                  Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className="text-slate-300 transition-colors hover:text-emerald-400">
+                  Case Studies &amp; Projects
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="text-slate-300 transition-colors hover:text-emerald-400">
+                  About &amp; Methodology
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="text-slate-300 transition-colors hover:text-emerald-400">
+                  Start a Project
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Direct Inquiries & Profiles */}
+          <div className="space-y-4">
+            <p className="text-xs font-bold uppercase tracking-wider text-amber-400">
+              Client Inquiries
             </p>
             <a
               href={`mailto:${siteConfig.email}`}
@@ -54,10 +99,12 @@ export function Footer() {
               {siteConfig.email}
             </a>
             <a
-              href={`tel:${siteConfig.phone}`}
-              className="block text-sm font-medium text-slate-300 transition-colors hover:text-white"
+              href={siteConfig.whatsappUrl}
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-400 transition-colors hover:bg-emerald-500/20"
             >
-              {siteConfig.phone}
+              <span>💬 Direct WhatsApp</span>
             </a>
             <div className="flex flex-wrap gap-2 pt-2">
               {siteConfig.profiles.map((p) => (
@@ -76,14 +123,13 @@ export function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-10 flex flex-col gap-4 border-t border-slate-800/80 pt-6 sm:flex-row sm:items-center sm:justify-between">
+        <div className="mt-12 flex flex-col gap-4 border-t border-slate-800/80 pt-6 sm:flex-row sm:items-center sm:justify-between">
           <p className="text-xs text-slate-400">
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
 
           {/* Dual Ecosystem Indicators */}
           <div className="flex flex-wrap items-center gap-4 text-xs text-slate-400">
-            {/* Microsoft */}
             <div className="flex items-center gap-1.5">
               <span title="Word" className="h-2 w-2 rounded-full bg-[#185abd]" />
               <span title="Excel" className="h-2 w-2 rounded-full bg-[#107c41]" />
@@ -92,7 +138,6 @@ export function Footer() {
               <span>Microsoft 365</span>
             </div>
             <span className="text-slate-600">•</span>
-            {/* Google Workspace */}
             <div className="flex items-center gap-1.5">
               <span title="Gmail" className="h-2 w-2 rounded-full bg-[#ea4335]" />
               <span title="Drive" className="h-2 w-2 rounded-full bg-[#34a853]" />
