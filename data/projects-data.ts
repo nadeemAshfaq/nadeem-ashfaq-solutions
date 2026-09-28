@@ -32,29 +32,23 @@ export const projectsData: ProjectItem[] = [
   },
   {
     slug: "socialagent",
-    title: "SocialAgent — Autonomous Social Automation Platform",
-    subtitle: "AI-driven engine automating content ideation, copywriting, multi-platform scheduling, and performance analytics.",
+    title: "Social Agent — AI Social Media Content Planning Platform",
+    subtitle: "AI-assisted social content planning, review, and publishing workspace.",
     description:
-      "An automated social media copilot that analyzes brand voice, generates high-engagement copy across multiple platforms, schedules distribution, and surfaces actionable performance metrics.",
-    clientOutcome:
-      "Replaces hours of manual social copywriting and distribution with autonomous AI agents that maintain consistent brand presence 24/7.",
-    architecturePoints: [
-      "Multi-agent LLM prompt orchestration enforcing specific brand guidelines and tones",
-      "Asynchronous job queuing for scheduled content dispatch across social networks",
-      "Direct API integrations with LinkedIn, Twitter/X, and social platform webhooks",
-      "Engagement telemetry aggregation and automated weekly performance reporting",
-      "Scalable Node.js microservices architecture deployed with high availability"
+      "Social Agent researches a brand’s market and competitors, plans topics, generates captions and visuals, runs quality and brand-tone checks, and supports approval and publishing workflows from a multi-brand workspace.",
+    productFeatures: [
+      "AI market and competitor research",
+      "Topic and content planning",
+      "AI-generated captions and visuals",
+      "Quality assurance and brand-tone review",
+      "Human approval and client approval through magic links",
+      "Multi-brand agency workspace",
+      "Publishing to Instagram, Facebook, LinkedIn, and X",
+      "Scheduled publishing"
     ],
-    techStack: [
-      "AI Agents",
-      "OpenAI",
-      "Node.js",
-      "TypeScript",
-      "Social Platform APIs",
-      "Queue Workers",
-      "SaaS"
-    ],
-    tags: ["AI Automation", "SaaS Platform", "Social APIs"],
+    tags: ["AI Content Planning", "Social Media", "Publishing Workflow"],
+    liveUrl: "https://socialagent.pro/",
+    caseStudyUrl: "/projects/socialagent",
     featured: true
   },
   {

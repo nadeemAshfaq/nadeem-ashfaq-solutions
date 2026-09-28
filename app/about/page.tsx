@@ -3,10 +3,11 @@ import Link from "next/link";
 
 import { CTABanner } from "@/components/ui/cta-banner";
 import { SectionContainer } from "@/components/ui/section-container";
-import { siteConfig } from "@/data/site-config";
+import { siteConfig, siteUrl } from "@/data/site-config";
 
 export const metadata: Metadata = {
   title: `About Nadeem Ashfaq | Senior Full-Stack Developer & Solutions Architect`,
+  alternates: { canonical: `${siteUrl}/about` },
   description:
     "Learn about Nadeem Ashfaq's engineering philosophy, architecture-first approach, and specialized expertise in Microsoft 365, Google Workspace, and AI solutions.",
   keywords: [

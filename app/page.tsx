@@ -1,21 +1,169 @@
+import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-import { CTABanner } from "@/components/ui/cta-banner";
 import { FAQAccordion } from "@/components/ui/faq-accordion";
 import { SectionContainer } from "@/components/ui/section-container";
 import { SectionHeading } from "@/components/ui/section-heading";
 import { clientProcess, homeFaqs, whyWorkWithMe } from "@/data/client-value-data";
-import { projectsData } from "@/data/projects-data";
-import { servicesData } from "@/data/services-data";
-import { siteConfig } from "@/data/site-config";
+import { servicePagesData } from "@/data/service-pages-data";
+import { siteConfig, siteUrl } from "@/data/site-config";
 import { skillCategories } from "@/features/portfolio/data/portfolio-data";
 
+const homepageServiceOrder = [
+  "full-stack-development",
+  "microsoft-365-development",
+  "sharepoint-spfx-development",
+  "office-add-in-development",
+  "google-workspace-add-on-development",
+  "power-platform-development",
+  "ai-development",
+  "api-integration"
+];
+
+const expertiseGroups = [
+  {
+    title: "Product Engineering",
+    services: [
+      { label: "Full-Stack Development", slug: "full-stack-development" },
+      { label: "Browser Extensions", slug: "browser-extension-development" },
+      { label: "API Integration", slug: "api-integration" }
+    ]
+  },
+  {
+    title: "Microsoft Ecosystem",
+    services: [
+      { label: "Microsoft 365", slug: "microsoft-365-development" },
+      { label: "Copilot", slug: "microsoft-copilot-development" },
+      { label: "Dynamics 365", slug: "dynamics-365-development" },
+      { label: "SharePoint & SPFx", slug: "sharepoint-spfx-development" },
+      { label: "Office Add-ins", slug: "office-add-in-development" },
+      { label: "Power Platform", slug: "power-platform-development" }
+    ]
+  },
+  {
+    title: "AI & Automation",
+    services: [
+      { label: "Python & AI", slug: "ai-development" },
+      { label: "WhatsApp AI", slug: "whatsapp-ai-bot-development" },
+      { label: "AI Development", slug: "ai-development" }
+    ]
+  },
+  {
+    title: "Google Workspace",
+    services: [
+      { label: "Workspace Add-ons", slug: "google-workspace-add-on-development" }
+    ]
+  }
+];
+
+const pageTitle = `${siteConfig.name} | Full-Stack Developer & Microsoft 365 Solutions Architect`;
+const pageDescription =
+  "Full-stack development and solutions architecture across Microsoft 365, Copilot, Dynamics 365 integrations, Python, Google Workspace, AI, WhatsApp workflows, browser extensions, and SaaS.";
+
+export const metadata: Metadata = {
+  title: pageTitle,
+  description: pageDescription,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteUrl,
+    siteName: siteConfig.name,
+    title: pageTitle,
+    description: pageDescription,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${siteConfig.name} | Full-Stack Developer & Solutions Architect` }]
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: pageTitle,
+    description: pageDescription,
+    images: ["/opengraph-image"]
+  }
+};
+
+type HomepageProject = {
+  title: string;
+  subtitle: string;
+  description: string;
+  techStack: string[];
+  href?: string;
+  linkLabel?: string;
+  external: boolean;
+  caseStudyUrl?: string;
+};
+
+const homepageProjects: HomepageProject[] = [
+  {
+    title: "AskX",
+    subtitle: "AI-powered SaaS platform",
+    description:
+      "A business-focused AI chatbot platform combining knowledge bases, AI conversations, analytics, integrations, and customer handoff.",
+    techStack: ["React", "TypeScript", "Node.js", "AI/LLM", "Stripe", "Keycloak"],
+    href: "https://askx.io/",
+    linkLabel: "View AskX",
+    external: true
+  },
+  {
+    title: "Social Agent",
+    subtitle: "AI social media content planning platform",
+    description:
+      "Research, plan, create, review, approve, and publish social content from a multi-brand workspace.",
+    techStack: [],
+    href: "https://socialagent.pro/",
+    linkLabel: "Visit Social Agent",
+    external: true,
+    caseStudyUrl: "/projects/socialagent"
+  },
+  {
+    title: "Office Add-ins",
+    subtitle: "Microsoft Office productivity solutions",
+    description:
+      "Custom solutions for Word, Excel, PowerPoint, and Outlook using Office.js, React, TypeScript, Microsoft Graph, authentication, and business APIs.",
+    techStack: ["Office.js", "React", "TypeScript", "Microsoft Graph", "Business APIs"],
+    href: "/services/office-add-in-development",
+    linkLabel: "View Office Add-ins",
+    external: false
+  }
+];
+
 export default function Home() {
-  const featuredProjects = projectsData.filter((p) => p.featured);
+  const homepageServices = [...servicePagesData]
+    .filter((service) => homepageServiceOrder.includes(service.slug))
+    .sort((first, second) => homepageServiceOrder.indexOf(first.slug) - homepageServiceOrder.indexOf(second.slug));
 
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "@id": `${siteUrl}/#webpage`,
+            url: siteUrl,
+            name: pageTitle,
+            description: pageDescription,
+            isPartOf: { "@id": `${siteUrl}/#website` },
+            about: { "@id": `${siteUrl}/#person` },
+            mainEntity: { "@id": `${siteUrl}/#person` }
+          }).replace(/</g, "\\u003c")
+        }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            mainEntity: homeFaqs.map((faq) => ({
+              "@type": "Question",
+              name: faq.question,
+              acceptedAnswer: { "@type": "Answer", text: faq.answer }
+            }))
+          }).replace(/</g, "\\u003c")
+        }}
+      />
       {/* ── 1. Hero Section ── */}
       <section
         id="home"
@@ -38,31 +186,15 @@ export default function Home() {
         <div className="relative grid w-full items-center gap-12 px-6 pb-20 pt-16 sm:px-10 sm:pb-24 lg:grid-cols-[1.25fr_0.75fr] xl:grid-cols-[1.35fr_0.65fr] lg:px-14 xl:px-16 2xl:px-20 lg:py-28">
           {/* Left Column: Copy & Actions */}
           <div className="space-y-8">
-            {/* Availability Badge */}
-            <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-4 py-1.5 shadow-inner">
-              <span className="relative flex h-2 w-2">
-                <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-                <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
-              </span>
-              <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
-                Available for Architecture &amp; Development Projects
-              </span>
-            </div>
-
             {/* Main Role Title */}
             <div className="space-y-3">
               <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.1] tracking-tight text-white sm:text-5xl lg:text-6xl">
                 {siteConfig.role}
               </h1>
-              <p className="text-xl font-bold bg-gradient-to-r from-emerald-400 via-sky-400 to-amber-300 bg-clip-text text-transparent sm:text-2xl">
-                {siteConfig.subRole}
+              <p className="max-w-4xl text-xl font-bold bg-gradient-to-r from-emerald-400 via-sky-400 to-amber-300 bg-clip-text text-transparent sm:text-2xl">
+                {siteConfig.headline}
               </p>
             </div>
-
-            {/* Value Proposition */}
-            <p className="max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg">
-              {siteConfig.headline}
-            </p>
 
             <p className="max-w-3xl text-sm leading-relaxed text-slate-400">
               {siteConfig.description}
@@ -79,33 +211,11 @@ export default function Home() {
               </Link>
 
               <Link
-                href="/services"
+                href="#featured-projects"
                 className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-7 py-4 text-sm font-semibold text-slate-200 backdrop-blur-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-500 hover:bg-slate-800 hover:text-white"
               >
-                <span>Explore Services</span>
+                <span>Explore My Work</span>
               </Link>
-
-              <a
-                href={siteConfig.whatsappUrl}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-5 py-4 text-sm font-semibold text-emerald-400 transition-all duration-200 hover:bg-emerald-500/20"
-              >
-                <span>💬 WhatsApp</span>
-              </a>
-            </div>
-
-            {/* Four Pillars Strip */}
-            <div className="grid gap-6 border-t border-slate-800/80 pt-8 sm:grid-cols-2 xl:grid-cols-4">
-              {siteConfig.stats.map((item) => (
-                <div key={item.label} className="space-y-1">
-                  <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
-                    {item.label}
-                  </p>
-                  <p className="text-sm font-bold text-white">{item.value}</p>
-                  <p className="text-xs text-emerald-400/90">{item.detail}</p>
-                </div>
-              ))}
             </div>
           </div>
 
@@ -116,7 +226,7 @@ export default function Home() {
               <div className="relative overflow-hidden rounded-[22px] bg-slate-900">
                 <Image
                   src="/Profile.png"
-                  alt="Nadeem Ashfaq – Senior Full-Stack Developer & Solutions Architect"
+                  alt="Portrait of Nadeem Ashfaq, Senior Full-Stack Developer and Solutions Architect"
                   width={500}
                   height={580}
                   className="h-auto w-full object-cover"
@@ -127,7 +237,7 @@ export default function Home() {
                 <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-slate-950 via-slate-950/70 to-transparent p-6 pt-16">
                   <p className="text-base font-bold text-white">Nadeem Ashfaq</p>
                   <p className="text-xs font-semibold text-emerald-400">
-                    Microsoft 365, Google Workspace &amp; AI Architect
+                    Full-Stack Developer &amp; Solutions Architect
                   </p>
                 </div>
               </div>
@@ -135,86 +245,81 @@ export default function Home() {
 
             {/* Floating Badge: Microsoft 365 */}
             <div className="absolute -right-3 top-6 flex items-center gap-2 rounded-xl border border-blue-500/40 bg-slate-900/95 px-3 py-2 shadow-xl backdrop-blur-md">
-              <span className="flex h-5 w-5 items-center justify-center rounded bg-[#0078d4] text-[10px] font-black text-white shadow-sm">
-                M
-              </span>
+              <span aria-hidden="true" className="h-5 w-5 rounded bg-[#0078d4] shadow-sm" />
               <span className="text-xs font-bold text-white">Microsoft 365</span>
             </div>
 
             {/* Floating Badge: Google Workspace */}
             <div className="absolute -left-3 top-28 flex items-center gap-2 rounded-xl border border-amber-500/40 bg-slate-900/95 px-3 py-2 shadow-xl backdrop-blur-md">
-              <span className="flex h-5 w-5 items-center justify-center rounded bg-amber-500 text-[10px] font-black text-white shadow-sm">
-                G
-              </span>
+              <span aria-hidden="true" className="h-5 w-5 rounded bg-amber-500 shadow-sm" />
               <span className="text-xs font-bold text-white">Google Workspace</span>
             </div>
 
             {/* Floating Badge: AI Automation */}
             <div className="absolute -right-3 bottom-24 flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-slate-900/95 px-3 py-2 shadow-xl backdrop-blur-md">
-              <span className="flex h-5 w-5 items-center justify-center rounded bg-emerald-500 text-[10px] font-black text-white shadow-sm">
-                AI
-              </span>
+              <span aria-hidden="true" className="h-5 w-5 rounded bg-emerald-500 shadow-sm" />
               <span className="text-xs font-bold text-white">AI Automation</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 2. Trust & Core Ecosystems Strip ── */}
+      {/* ── 2. Expertise ── */}
       <section className="border-b border-slate-800/80 bg-slate-950/60 py-8">
         <SectionContainer id="trust-strip">
           <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
             <p className="text-xs font-bold uppercase tracking-wider text-slate-400">
-              Core Architectural Ecosystems:
+              Expertise across connected product and business ecosystems:
             </p>
-            <div className="flex flex-wrap items-center gap-3 sm:gap-6">
-              {[
-                { label: "Microsoft 365", color: "text-blue-400 border-blue-500/30 bg-blue-500/10" },
-                { label: "Google Workspace", color: "text-amber-400 border-amber-500/30 bg-amber-500/10" },
-                { label: "Full-Stack Web & SaaS", color: "text-emerald-400 border-emerald-500/30 bg-emerald-500/10" },
-                { label: "OpenAI & RAG", color: "text-teal-400 border-teal-500/30 bg-teal-500/10" },
-                { label: "Azure & Cloud APIs", color: "text-cyan-400 border-cyan-500/30 bg-cyan-500/10" }
-              ].map((badge) => (
-                <span
-                  key={badge.label}
-                  className={`rounded-full border px-4 py-1.5 text-xs font-bold ${badge.color}`}
-                >
-                  {badge.label}
-                </span>
+            <div className="grid w-full gap-6 sm:grid-cols-2 xl:grid-cols-4">
+              {expertiseGroups.map((group) => (
+                <section key={group.title} aria-label={group.title}>
+                  <h2 className="text-xs font-bold uppercase text-slate-300">{group.title}</h2>
+                  <ul className="mt-2 flex flex-wrap gap-x-3 gap-y-1.5">
+                    {group.services.map((service) => (
+                      <li key={`${group.title}-${service.label}`}>
+                        <Link href={`/services/${service.slug}`} className="text-xs text-emerald-300 underline decoration-emerald-500/30 underline-offset-4 hover:text-white">
+                          {service.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
               ))}
             </div>
           </div>
         </SectionContainer>
       </section>
 
-      {/* ── 3. Client Services Grid ── */}
+      {/* ── 3. Services ── */}
       <section className="py-20 sm:py-24 border-b border-slate-800/80">
         <SectionContainer id="services">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end mb-12">
             <div>
               <SectionHeading
-                eyebrow="Client Services"
-                title="Specialized Architecture & Development Offerings"
-                description="Engineered to solve concrete business bottlenecks, connect corporate systems, and build scalable revenue-generating software."
+                eyebrow="Services"
+                title="Solutions built around real business requirements"
+                description="From full-stack applications and productivity add-ons to AI workflows and system integrations."
               />
             </div>
             <Link
               href="/services"
               className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-400 transition-colors hover:text-emerald-300"
             >
-              <span>Explore All 8 Services</span>
+              <span>Explore All Services</span>
               <span>→</span>
             </Link>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {servicesData.slice(0, 6).map((service) => (
+            {homepageServices.map((service) => (
               <article
                 key={service.slug}
                 className="group flex flex-col justify-between rounded-3xl border border-slate-800 bg-slate-900/80 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-950/20"
               >
                 <div>
                   <div
+                    aria-hidden="true"
                     className={`mb-6 flex h-12 w-12 items-center justify-center rounded-xl border text-2xl shadow-inner ${service.accentColor}`}
                   >
                     {service.icon}
@@ -231,7 +336,7 @@ export default function Home() {
                   <ul className="mt-6 space-y-2 border-t border-slate-800/80 pt-4">
                     {service.capabilities.slice(0, 3).map((cap) => (
                       <li key={cap} className="flex items-start gap-2 text-xs text-slate-300">
-                        <span className="text-emerald-400 font-bold">✓</span>
+                        <span aria-hidden="true" className="text-emerald-400 font-bold">✓</span>
                         <span>{cap}</span>
                       </li>
                     ))}
@@ -241,10 +346,10 @@ export default function Home() {
                 <div className="mt-8 border-t border-slate-800/80 pt-4">
                   <Link
                     href={`/services/${service.slug}`}
-                    className="inline-flex items-center gap-1 text-xs font-bold text-emerald-400 transition-colors hover:text-emerald-300"
+                    className="flex w-full items-center justify-between gap-3 text-xs font-bold text-emerald-400 transition-colors hover:text-emerald-300"
                   >
-                    <span>Read Full Service Blueprint</span>
-                    <span className="transition-transform group-hover:translate-x-1">→</span>
+                    <span>Explore Service</span>
+                    <span aria-hidden="true" className="transition-transform group-hover:translate-x-1">→</span>
                   </Link>
                 </div>
               </article>
@@ -253,44 +358,25 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      {/* ── 4. Featured Real Projects (Client Evidence) ── */}
+      {/* ── 4. Featured Work ── */}
       <section className="py-20 sm:py-24 border-b border-slate-800/80 bg-slate-950/60">
         <SectionContainer id="featured-projects">
           <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-end mb-12">
             <div>
               <SectionHeading
-                eyebrow="Case Studies &amp; Evidence"
-                title="Real Production Systems Built for High Scale"
-                description="No mockups or toy projects. Review actual systems engineered with production RAG, multi-tenancy, Office.js, and Google Workspace APIs."
+                eyebrow="Featured Work"
+                title="Products and solutions I've helped build"
               />
             </div>
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-1.5 text-sm font-bold text-emerald-400 transition-colors hover:text-emerald-300"
-            >
-              <span>View All Case Studies</span>
-              <span>→</span>
-            </Link>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            {featuredProjects.map((project) => (
+          <div className="grid gap-8 md:grid-cols-3">
+            {homepageProjects.map((project) => (
               <article
-                key={project.slug}
+                key={project.title}
                 className="group flex flex-col justify-between rounded-3xl border border-slate-800 bg-slate-900/80 p-8 sm:p-10 backdrop-blur-sm transition-all duration-300 hover:border-emerald-500/50 hover:shadow-2xl hover:shadow-emerald-950/20"
               >
                 <div>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md border border-slate-700 bg-slate-800/80 px-2.5 py-1 text-xs font-semibold text-slate-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-
                   <h3 className="text-2xl font-bold text-white transition-colors group-hover:text-emerald-300">
                     {project.title}
                   </h3>
@@ -303,17 +389,11 @@ export default function Home() {
                     {project.description}
                   </p>
 
-                  <div className="mt-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4">
-                    <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">
-                      Measurable Client Outcome:
-                    </p>
-                    <p className="mt-1 text-xs text-slate-200">{project.clientOutcome}</p>
-                  </div>
                 </div>
 
                 <div className="mt-8 border-t border-slate-800/80 pt-5">
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.techStack.slice(0, 5).map((tech) => (
+                  {project.techStack.length > 0 && <div className="mb-4 flex flex-wrap gap-2">
+                    {project.techStack.map((tech) => (
                       <span
                         key={tech}
                         className="rounded-md border border-slate-700/80 bg-slate-800 px-2.5 py-1 text-xs text-slate-300"
@@ -321,15 +401,24 @@ export default function Home() {
                         {tech}
                       </span>
                     ))}
-                  </div>
+                  </div>}
 
-                  <Link
-                    href="/projects"
-                    className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300"
-                  >
-                    <span>Inspect Architecture Points</span>
-                    <span>→</span>
-                  </Link>
+                  {project.href && project.linkLabel && (
+                    project.external ? (
+                      <a href={project.href} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300">
+                        <span>{project.linkLabel}</span><span>↗</span>
+                      </a>
+                    ) : (
+                      <Link href={project.href} className="inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300">
+                        <span>{project.linkLabel}</span><span>→</span>
+                      </Link>
+                    )
+                  )}
+                  {project.caseStudyUrl && (
+                    <Link href={project.caseStudyUrl} className="ml-4 inline-flex items-center gap-1.5 text-xs font-bold text-emerald-400 hover:text-emerald-300">
+                      <span>View case study</span><span aria-hidden="true">→</span>
+                    </Link>
+                  )}
                 </div>
               </article>
             ))}
@@ -337,13 +426,70 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      {/* ── 5. Why Work With Me (Value & Risk Reversal) ── */}
+      {/* ── 5. Microsoft 365 and Google Workspace ── */}
+      <section className="border-b border-slate-800/80 py-20 sm:py-24">
+        <SectionContainer id="productivity-platforms">
+          <SectionHeading
+            eyebrow="Connected Productivity Platforms"
+            title="Building solutions across the platforms businesses already use"
+            description="I work across Microsoft 365 and Google Workspace, helping organizations extend their existing productivity platforms rather than adding disconnected systems to their workflows."
+          />
+          <div className="grid gap-8 md:grid-cols-2">
+            <article className="rounded-3xl border border-blue-500/30 bg-slate-900/80 p-8">
+              <h3 className="text-xl font-bold text-white">Microsoft 365</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">SharePoint, SPFx, Office.js, Microsoft Graph, Entra ID, Power Apps, and Power Automate.</p>
+            </article>
+            <article className="rounded-3xl border border-amber-500/30 bg-slate-900/80 p-8">
+              <h3 className="text-xl font-bold text-white">Google Workspace</h3>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">Gmail, Google Docs, Google Sheets, Google Drive, Google Workspace APIs, and Apps Script.</p>
+            </article>
+          </div>
+        </SectionContainer>
+      </section>
+
+      {/* ── 6. AI and Automation ── */}
+      <section className="border-b border-slate-800/80 bg-slate-950/60 py-20 sm:py-24">
+        <SectionContainer id="ai-automation">
+          <SectionHeading
+            eyebrow="Python, AI & Automation"
+            title="Turning AI capabilities into practical business software"
+            description="I integrate AI into existing products and workflows rather than treating it as a standalone feature."
+          />
+          <ul className="grid gap-x-8 gap-y-4 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              "AI chatbots",
+              "Python backend services",
+              "Knowledge-base and RAG systems",
+              "LLM integrations",
+              "AI agents",
+              "Business workflow automation",
+              "Document and data processing",
+              "AI-powered SaaS features",
+              "API-connected AI workflows"
+            ].map((item) => (
+              <li key={item} className="border-b border-slate-800 pb-3 text-sm text-slate-200">{item}</li>
+            ))}
+          </ul>
+        </SectionContainer>
+      </section>
+
+      <section className="border-b border-slate-800/80 py-20 sm:py-24">
+        <SectionContainer id="common-questions">
+          <SectionHeading
+            eyebrow="Common Questions"
+            title="Practical answers before we start"
+          />
+          <FAQAccordion faqs={homeFaqs} columns={2} />
+        </SectionContainer>
+      </section>
+
+      {/* ── 7. Why Work With Me ── */}
       <section className="py-20 sm:py-24 border-b border-slate-800/80">
         <SectionContainer id="why-work-with-me">
           <SectionHeading
             eyebrow="Why Work With Me"
-            title="Senior Technical Architecture with Business Accountability"
-            description="When you engage me, you work directly with a senior solutions architect—not an agency middleman or junior contractor."
+            title="From business requirement to production system"
+            description="I can work across the full path: understanding the requirement, shaping the architecture, building the product, and connecting it to the systems your business uses."
           />
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -352,7 +498,7 @@ export default function Home() {
                 key={prop.title}
                 className="rounded-3xl border border-slate-800 bg-slate-900/80 p-8 backdrop-blur-sm transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40"
               >
-                <span className="text-3xl mb-4 block">{prop.icon}</span>
+                <span aria-hidden="true" className="text-3xl mb-4 block">{prop.icon}</span>
                 <h3 className="text-lg font-bold text-white mb-2">{prop.title}</h3>
                 <p className="text-xs leading-relaxed text-slate-300">{prop.description}</p>
               </div>
@@ -361,13 +507,12 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      {/* ── 6. Technologies (6 Structured Pillars) ── */}
+      {/* ── 8. Technology Expertise ── */}
       <section className="py-20 sm:py-24 border-b border-slate-800/80 bg-slate-950/60">
         <SectionContainer id="technologies">
           <SectionHeading
-            eyebrow="Technology Foundation"
-            title="Structured Architecture &amp; Stack Competencies"
-            description="Every technology is selected for long-term maintainability, enterprise security standards, and high concurrency."
+            eyebrow="Technology Expertise"
+            title="Technologies across the stack"
           />
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -396,16 +541,15 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      {/* ── 7. Client Working Process ── */}
+      {/* ── 9. Delivery Approach ── */}
       <section className="py-20 sm:py-24 border-b border-slate-800/80">
         <SectionContainer id="client-process">
           <SectionHeading
-            eyebrow="Working Process"
-            title="How We Work Together: From Scope to Production"
-            description="A disciplined, transparent delivery framework designed to eliminate guesswork, control budgets, and hit milestones on schedule."
+            eyebrow="Delivery Approach"
+            title="From requirements to production"
           />
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
             {clientProcess.map((step) => (
               <div
                 key={step.step}
@@ -431,25 +575,16 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      {/* ── 8. Client FAQs ── */}
-      <section className="py-20 sm:py-24 border-b border-slate-800/80 bg-slate-950/60">
-        <SectionContainer id="faq">
-          <div className="mb-12">
-            <SectionHeading
-              eyebrow="Client FAQs"
-              title="Frequently Asked Questions by Prospective Clients"
-              description="Direct answers regarding project kickoff, technology feasibility, platform choices, and contract terms."
-            />
-          </div>
-
-          <FAQAccordion faqs={homeFaqs} className="max-w-4xl" />
-        </SectionContainer>
-      </section>
-
-      {/* ── 9. Final CTA Banner ── */}
+      {/* ── 10. Final CTA ── */}
       <section className="py-20 sm:py-24">
         <SectionContainer id="cta">
-          <CTABanner />
+          <div className="rounded-3xl border border-emerald-500/30 bg-gradient-to-br from-emerald-950/80 via-slate-900 to-slate-950 p-8 text-center sm:p-12 lg:p-16">
+            <h2 className="text-3xl font-extrabold text-white sm:text-4xl">Have a product, integration, or technical challenge?</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-slate-300">Let's discuss what you're building and determine the right technical approach.</p>
+            <Link href="/contact" className="mt-8 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-8 py-4 text-sm font-bold text-white transition-colors hover:bg-emerald-500">
+              Start a Project <span>→</span>
+            </Link>
+          </div>
         </SectionContainer>
       </section>
     </main>

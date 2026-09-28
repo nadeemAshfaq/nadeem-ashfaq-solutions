@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
 
 import { SectionContainer } from "@/components/ui/section-container";
-import { siteConfig } from "@/data/site-config";
+import { siteConfig, siteUrl } from "@/data/site-config";
 
 export const metadata: Metadata = {
   title: `Start a Project & Contact | ${siteConfig.name}`,
+  alternates: { canonical: `${siteUrl}/contact` },
   description:
     "Get in touch with Nadeem Ashfaq for custom Microsoft 365, Google Workspace, Full-Stack, and AI solutions architecture. Inquire directly via WhatsApp or email.",
   keywords: [
@@ -50,7 +51,7 @@ export default function ContactPage() {
                   className="group flex items-start gap-4 rounded-2xl border border-emerald-500/30 bg-emerald-500/10 p-5 transition-all hover:-translate-y-0.5 hover:border-emerald-500/60 hover:bg-emerald-500/20"
                 >
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-2xl text-emerald-400 shadow-inner">
-                    💬
+                    <span aria-hidden="true">💬</span>
                   </span>
                   <div className="flex-1">
                     <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">

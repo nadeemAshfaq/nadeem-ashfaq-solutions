@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-import { servicesData } from "@/data/services-data";
+import { servicePagesData } from "@/data/service-pages-data";
 import { siteConfig } from "@/data/site-config";
 
 export function Footer() {
@@ -14,9 +14,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-3 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-black text-white shadow-md shadow-emerald-500/20">
-                N
-              </span>
+              <span aria-hidden="true" className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 shadow-md shadow-emerald-500/20" />
               <span className="text-base font-bold text-white">{siteConfig.name}</span>
             </div>
             <p className="text-sm font-semibold text-emerald-400">{siteConfig.role}</p>
@@ -32,7 +30,7 @@ export function Footer() {
               Specialized Services
             </p>
             <ul className="space-y-2 text-xs">
-              {servicesData.slice(0, 5).map((service) => (
+              {servicePagesData.map((service) => (
                 <li key={service.slug}>
                   <Link
                     href={`/services/${service.slug}`}
@@ -104,7 +102,7 @@ export function Footer() {
               rel="noreferrer"
               className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-bold text-emerald-400 transition-colors hover:bg-emerald-500/20"
             >
-              <span>💬 Direct WhatsApp</span>
+              <span><span aria-hidden="true">💬</span> Direct WhatsApp</span>
             </a>
             <div className="flex flex-wrap gap-2 pt-2">
               {siteConfig.profiles.map((p) => (

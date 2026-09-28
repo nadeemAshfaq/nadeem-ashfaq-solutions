@@ -3,85 +3,87 @@ import type { FAQItem, ProcessStep, ValueProp } from "@/types/portfolio";
 export const whyWorkWithMe: ValueProp[] = [
   {
     icon: "🎯",
-    title: "Specialized Dual-Ecosystem Mastery",
+    title: "Work across connected ecosystems",
     description:
-      "Unlike generic agencies, I specialize directly at the intersection of modern full-stack web platforms and the two dominant workplace platforms: Microsoft 365 and Google Workspace."
+      "Full-stack development, Microsoft 365, Google Workspace, AI, and integrations come together in one engineering practice."
   },
   {
     icon: "🏛️",
-    title: "Architecture-First Engineering",
+    title: "Architecture through delivery",
     description:
-      "I prioritize clean, maintainable, and scalable architecture from day one. Your codebase will be well-documented, type-safe, and built to evolve without costly technical debt."
+      "Work can span the complete path from understanding requirements and shaping architecture to building and integrating a production system."
   },
   {
     icon: "💼",
-    title: "Business-Focused Delivery",
+    title: "Built around business requirements",
     description:
-      "Technology is only as good as the business outcome it generates. Every feature is aligned with reducing labor hours, accelerating revenue, or unblocking operational bottlenecks."
+      "Solutions are shaped around the business problem, existing tools, users, and technical requirements."
   },
   {
     icon: "🛡️",
-    title: "Production-Tested Reliability",
+    title: "Products, platforms, and integrations",
     description:
-      "From strict OAuth scopes and enterprise SSO to vector embeddings and webhook retry queues, all deliverables are engineered for security, high availability, and compliance."
+      "Build SaaS products, extend Microsoft and Google productivity platforms, add AI capabilities, and connect third-party systems."
   }
 ];
 
 export const clientProcess: ProcessStep[] = [
   {
     step: "01",
-    title: "Discovery & Architecture Blueprint",
+    title: "Understand",
     description:
-      "We dissect your business requirements, workflow bottlenecks, and technical constraints to establish a clear architectural plan, data schema, and milestone roadmap.",
-    outcome: "Clear Scope, Fixed Milestones & Technical Spec"
+      "Clarify the business problem, users, existing systems, and technical requirements.",
+    outcome: "A shared understanding of the requirements"
   },
   {
     step: "02",
-    title: "Rapid Prototyping & UX Validation",
+    title: "Architect",
     description:
-      "I build early interactive prototypes—whether a task pane in Word, an add-on in Gmail, or a Next.js interface—so you validate the flow before full-scale engineering.",
-    outcome: "Validated UX & Confirmed Architecture"
+      "Design the application structure, integrations, data model, authentication, and deployment approach.",
+    outcome: "A technical approach aligned with the requirements"
   },
   {
     step: "03",
-    title: "Agile Development & Integrations",
+    title: "Build",
     description:
-      "Iterative bi-weekly sprints with continuous staging deployments. APIs, enterprise security policies, and third-party integrations are built with rigorous type-checking.",
-    outcome: "Production Code, Secure APIs & Test Coverage"
+      "Develop the product using maintainable, production-oriented technologies.",
+    outcome: "The application and its core capabilities"
   },
   {
     step: "04",
-    title: "Deployment, Handover & Ongoing Support",
+    title: "Integrate",
     description:
-      "Seamless launch to production tenants, cloud infrastructure, or marketplace publishing (AppSource / Workspace Marketplace), paired with documentation and warranty support.",
-    outcome: "Live Production System & Comprehensive Documentation"
+      "Connect APIs, business platforms, AI services, Microsoft 365, Google Workspace, and third-party systems.",
+    outcome: "Connected services and workflows"
+  },
+  {
+    step: "05",
+    title: "Deliver & Improve",
+    description:
+      "Deploy, test, monitor, and iterate based on real-world requirements.",
+    outcome: "A system ready to evolve with its requirements"
   }
 ];
 
 export const homeFaqs: FAQItem[] = [
   {
-    question: "What types of clients do you typically partner with?",
+    question: "What kinds of software projects do you take on?",
     answer:
-      "I work with B2B SaaS startups, growing companies, consulting firms, and enterprise departments looking for senior architectural leadership. My engagements range from building custom Google Workspace or Office Add-ins to architecting full-stack SaaS platforms and enterprise AI pipelines."
+      "Projects include full-stack web applications, SaaS products, Microsoft 365 and Google Workspace extensions, AI-enabled applications, and API integrations."
   },
   {
-    question: "Do you build both Microsoft 365 and Google Workspace solutions?",
+    question: "Can you build solutions for both Microsoft 365 and Google Workspace?",
     answer:
-      "Yes. I am one of the few architects with deep production experience across both ecosystems. Whether your company or your clients operate on Microsoft 365 (Word, Excel, Outlook, SharePoint) or Google Workspace (Gmail, Docs, Sheets, Drive), I build native solutions that fit their exact environment."
+      "Yes. Solutions can extend Microsoft 365 tools such as SharePoint, Word, Excel, Outlook, and Teams, as well as Google Workspace tools such as Gmail, Docs, Sheets, and Drive."
   },
   {
-    question: "How do we get started on a project together?",
+    question: "Can you connect an application to our existing systems?",
     answer:
-      "Simply reach out via WhatsApp or the contact form with a brief summary of what you want to build or automate. We'll schedule a discovery call to review requirements, feasibility, timelines, and an architecture blueprint."
+      "Yes. Integrations can connect applications and productivity platforms with APIs, SaaS products, and other business systems, based on the project requirements."
   },
   {
-    question: "Can you take over or modernize an existing codebase?",
+    question: "How do we discuss a project?",
     answer:
-      "Yes. I frequently audit, refactor, and modernize legacy codebases—such as migrating outdated VSTO plugins to modern Office.js, upgrading legacy React apps to modern Next.js App Router, or integrating modern AI capabilities into existing enterprise tools."
-  },
-  {
-    question: "What are your collaboration and availability terms?",
-    answer:
-      "I offer milestone-based project contracts, ongoing monthly retainer architecture support, and dedicated consulting arrangements. All work is backed by transparent milestones, clear communication, and production-ready code."
+      "Use the contact page to share the goal, relevant systems, and constraints. We can then discuss scope and a suitable technical approach."
   }
 ];

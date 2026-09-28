@@ -4,12 +4,13 @@ export const siteConfig = {
   name: "Nadeem Ashfaq",
   title: "Nadeem Ashfaq | Senior Full-Stack Developer & Solutions Architect",
   role: "Senior Full-Stack Developer & Solutions Architect",
-  subRole: "Microsoft 365, Google Workspace & AI Solutions",
-  tagline: "High-performance web applications, enterprise productivity add-ons, and AI automation built for client growth.",
+  url: "https://nadeemashfaq.dev",
+  subRole: "Full-Stack Development, Microsoft 365, Google Workspace & AI",
+  tagline: "Web and Microsoft business solutions, Python backends, AI products, integrations, and automation.",
   headline:
-    "Building scalable web applications, custom Microsoft 365 solutions, Google Workspace Add-ons, AI-powered products, and seamless business integrations.",
+    "I build scalable web applications, Microsoft 365 and business solutions, AI-powered products, Python backends, integrations, and automation workflows.",
   description:
-    "I partner with founders, businesses, and enterprise teams to architect production-ready software: React, Next.js, TypeScript, Node.js, and .NET web platforms; custom Office.js & SPFx add-ins; Google Workspace Add-ons; and OpenAI LLM automation.",
+    "I design and build software across modern web technologies, Microsoft 365, SharePoint, Office Add-ins, Power Platform, Google Workspace, Python, AI/LLM systems, business applications, and third-party integrations.",
   phone: "+923450609006",
   email: "nadeemashfaq.it@gmail.com",
   whatsappUrl: `https://wa.me/923450609006?text=${encodeURIComponent(
@@ -27,6 +28,19 @@ export const siteConfig = {
     { label: "Delivery Model", value: "Architecture-First", detail: "Robust, Secure, Production-Tested" }
   ]
 };
+
+const configuredSiteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  process.env.VERCEL_PROJECT_PRODUCTION_URL ??
+  process.env.VERCEL_URL;
+
+export const siteUrl = new URL(
+  configuredSiteUrl
+    ? configuredSiteUrl.startsWith("http")
+      ? configuredSiteUrl
+      : `https://${configuredSiteUrl}`
+    : siteConfig.url
+).origin;
 
 export const navItems: NavItem[] = [
   { label: "Home", href: "/" },

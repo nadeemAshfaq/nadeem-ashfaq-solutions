@@ -3,11 +3,12 @@ import type { FAQItem } from "@/types/portfolio";
 type FAQAccordionProps = {
   faqs: FAQItem[];
   className?: string;
+  columns?: 1 | 2;
 };
 
-export function FAQAccordion({ faqs, className = "" }: FAQAccordionProps) {
+export function FAQAccordion({ faqs, className = "", columns = 1 }: FAQAccordionProps) {
   return (
-    <div className={`space-y-4 ${className}`}>
+    <div className={`grid grid-cols-1 gap-4 ${columns === 2 ? "md:grid-cols-2" : ""} ${className}`}>
       {faqs.map((faq) => (
         <details
           key={faq.question}

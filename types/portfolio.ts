@@ -26,32 +26,20 @@ export type ProjectItem = {
   title: string;
   subtitle: string;
   description: string;
-  clientOutcome: string;
-  architecturePoints: string[];
-  techStack: string[];
+  clientOutcome?: string;
+  architecturePoints?: string[];
+  techStack?: string[];
+  productFeatures?: string[];
   tags: string[];
   liveUrl?: string;
   repoUrl?: string;
+  caseStudyUrl?: string;
   featured?: boolean;
 };
 
 export type FAQItem = {
   question: string;
   answer: string;
-};
-
-export type ServiceItem = {
-  slug: string;
-  title: string;
-  shortDescription: string;
-  overview: string;
-  icon: string;
-  accentColor: string;
-  targetKeywords: string[];
-  capabilities: string[];
-  businessBenefits: string[];
-  faqs: FAQItem[];
-  relatedProjects: string[];
 };
 
 export type ProcessStep = {

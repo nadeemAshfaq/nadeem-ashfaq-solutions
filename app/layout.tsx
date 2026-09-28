@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 
 import { Footer } from "@/components/layout/footer";
 import { Navbar } from "@/components/layout/navbar";
-import { servicesData } from "@/data/services-data";
-import { siteConfig } from "@/data/site-config";
+import { servicePagesData } from "@/data/service-pages-data";
+import { siteConfig, siteUrl } from "@/data/site-config";
 
 import "./globals.css";
 
@@ -14,20 +14,16 @@ const manrope = Manrope({
   variable: "--font-inter"
 });
 
-const configuredSiteUrl =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  process.env.VERCEL_PROJECT_PRODUCTION_URL ??
-  process.env.VERCEL_URL;
-const siteUrl = configuredSiteUrl
-  ? new URL(configuredSiteUrl.startsWith("http") ? configuredSiteUrl : `https://${configuredSiteUrl}`).origin
-  : undefined;
-const personId = siteUrl ? `${siteUrl}/#person` : "#person";
-const pageTitle = `${siteConfig.name} | ${siteConfig.role} — ${siteConfig.subRole}`;
+const personId = `${siteUrl}/#person`;
+const websiteId = `${siteUrl}/#website`;
+const pageTitle = `${siteConfig.name} | Full-Stack Developer & Microsoft 365 Solutions Architect`;
 
 const targetedSkills = [
   "Full-Stack Web Development",
   "Microsoft 365 Development",
   "Microsoft 365 Solutions Architect",
+  "Microsoft 365 Copilot Integrations",
+  "Dynamics 365 Integrations",
   "SharePoint",
   "SPFx Developer",
   "Office.js",
@@ -48,6 +44,12 @@ const targetedSkills = [
   "Google Drive Integrations",
   "Google Apps Script",
   "Google Workspace APIs",
+  "Python",
+  "Python REST APIs",
+  "WhatsApp AI Bots",
+  "Chrome Extensions",
+  "Microsoft Edge Extensions",
+  "Manifest V3",
   "OAuth 2.0 Authentication",
   "AI Integrations",
   "OpenAI LLM Applications",
@@ -69,65 +71,63 @@ const structuredData = {
       "@type": "Person",
       "@id": personId,
       name: siteConfig.name,
-      jobTitle: `${siteConfig.role} (${siteConfig.subRole})`,
+      jobTitle: siteConfig.role,
       description: siteConfig.description,
-      ...(siteUrl ? { url: siteUrl } : {}),
+      url: siteUrl,
       knowsAbout: targetedSkills
     },
     {
       "@type": "WebSite",
-      ...(siteUrl ? { "@id": `${siteUrl}/#website`, url: siteUrl } : {}),
-      name: pageTitle,
+      "@id": websiteId,
+      url: siteUrl,
+      name: siteConfig.name,
       description: siteConfig.headline,
       publisher: { "@id": personId }
     },
-    ...servicesData.map((service) => ({
-      "@type": "Service",
-      name: service.title,
-      description: service.shortDescription,
-      provider: { "@id": personId }
-    }))
+    {
+      "@type": "ProfessionalService",
+      "@id": `${siteUrl}/#professional-service`,
+      name: siteConfig.name,
+      url: siteUrl,
+      description: siteConfig.description,
+      email: siteConfig.email,
+      founder: { "@id": personId },
+      knowsAbout: targetedSkills,
+      hasOfferCatalog: {
+        "@type": "OfferCatalog",
+        name: "Professional Services",
+        itemListElement: servicePagesData.map((service) => ({
+          "@type": "Offer",
+          itemOffered: {
+            "@type": "Service",
+            name: service.title,
+            description: service.shortDescription,
+            url: `${siteUrl}/services/${service.slug}`
+          }
+        }))
+      }
+    }
   ]
 };
 
 export const metadata: Metadata = {
-  ...(siteUrl ? { metadataBase: new URL(siteUrl), alternates: { canonical: siteUrl } } : {}),
-  title: pageTitle,
+  metadataBase: new URL(siteUrl),
+  title: `${siteConfig.name} | Senior Full-Stack Developer & Microsoft 365 Solutions Architect`,
   description: siteConfig.description,
-  keywords: [
-    "Full-Stack Developer",
-    "Solutions Architect",
-    "Microsoft 365 Developer",
-    "Microsoft 365 Solutions Architect",
-    "Office Add-in Developer",
-    "SharePoint Developer",
-    "SPFx Developer",
-    "Google Workspace Add-on Developer",
-    "Google Workspace Add-ons",
-    "Gmail Add-ons",
-    "Google Sheets Add-ons",
-    "Google Docs Add-ons",
-    "Google Apps Script Developer",
-    "Microsoft Graph Developer",
-    "Office.js Developer",
-    "Power Apps Developer",
-    "Power Automate Developer",
-    "AI Integration Developer",
-    "AI Automation Developer",
-    "SaaS Developer"
-  ],
   openGraph: {
     type: "website",
     locale: "en_US",
     siteName: siteConfig.name,
     title: pageTitle,
     description: siteConfig.description,
-    ...(siteUrl ? { url: siteUrl } : {})
+    url: siteUrl,
+    images: [{ url: "/opengraph-image", width: 1200, height: 630, alt: `${siteConfig.name} | Full-Stack Developer & Solutions Architect` }]
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: pageTitle,
-    description: siteConfig.description
+    description: siteConfig.description,
+    images: ["/opengraph-image"]
   }
 };
 

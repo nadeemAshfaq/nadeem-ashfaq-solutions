@@ -3,12 +3,13 @@ import type { Metadata } from "next";
 import { CTABanner } from "@/components/ui/cta-banner";
 import { SectionContainer } from "@/components/ui/section-container";
 import { projectsData } from "@/data/projects-data";
-import { siteConfig } from "@/data/site-config";
+import { siteConfig, siteUrl } from "@/data/site-config";
 
 export const metadata: Metadata = {
   title: `Case Studies & Featured Systems | ${siteConfig.name}`,
+  alternates: { canonical: `${siteUrl}/projects` },
   description:
-    "Review real-world production systems engineered by Nadeem Ashfaq: AI SaaS platforms, custom Google Workspace add-ons, enterprise Office.js add-ins, and SharePoint SPFx solutions.",
+    "Selected software products and platform solutions, including Social Agent, an AI social media content planning and publishing product.",
   keywords: [
     "AskX AI Chatbot",
     "SocialAgent AI",
@@ -27,14 +28,13 @@ export default function ProjectsPage() {
         <div className="mb-14 space-y-4">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-emerald-400">
             <span className="h-1.5 w-1.5 rounded-full bg-emerald-400 animate-pulse" />
-            Verified Case Studies
+            Selected Work
           </span>
           <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">
-            Production Systems &amp; Real Architectural Deliverables
+            Products &amp; Software Solutions
           </h1>
           <p className="max-w-3xl text-lg text-slate-300">
-            Every project below represents a real production deliverable engineered with clean architecture,
-            modern security standards, and measurable business outcomes.
+            A selection of products and solutions, with project details limited to publicly shareable information.
           </p>
         </div>
 
@@ -75,33 +75,34 @@ export default function ProjectsPage() {
                   </p>
 
                   {/* Measurable Client Outcome */}
-                  <div className="mt-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+                  {project.clientOutcome && <div className="mt-6 rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
                     <p className="text-xs font-bold uppercase tracking-wider text-emerald-400">
                       Business Outcome &amp; Value Delivered:
                     </p>
                     <p className="mt-1.5 text-sm font-medium text-slate-200">
                       {project.clientOutcome}
                     </p>
-                  </div>
+                  </div>}
                 </div>
 
                 {/* Right: Architecture & Tech Stack */}
-                <div className="flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-950/60 p-6 sm:p-8">
-                  <div>
-                    <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
-                      Key Technical Architecture
-                    </h3>
-                    <ul className="space-y-3">
-                      {project.architecturePoints.map((point) => (
-                        <li key={point} className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-300">
-                          <span className="text-emerald-400 font-bold">✓</span>
-                          <span>{point}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                {(project.architecturePoints?.length || project.techStack?.length || project.caseStudyUrl || project.liveUrl) ? (
+                  <div className="flex flex-col justify-between rounded-2xl border border-slate-800/90 bg-slate-950/60 p-6 sm:p-8">
+                    {project.architecturePoints && project.architecturePoints.length > 0 && <div>
+                      <h3 className="text-sm font-bold uppercase tracking-wider text-white mb-4">
+                        Key Technical Architecture
+                      </h3>
+                      <ul className="space-y-3">
+                        {project.architecturePoints.map((point) => (
+                          <li key={point} className="flex items-start gap-2.5 text-xs leading-relaxed text-slate-300">
+                            <span className="text-emerald-400 font-bold">✓</span>
+                            <span>{point}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>}
 
-                  <div className="mt-8 border-t border-slate-800/80 pt-6">
+                    {project.techStack && project.techStack.length > 0 && <div className="mt-8 border-t border-slate-800/80 pt-6">
                     <p className="mb-3 text-xs font-bold uppercase tracking-wider text-slate-400">
                       Tech Stack
                     </p>
@@ -115,8 +116,14 @@ export default function ProjectsPage() {
                         </span>
                       ))}
                     </div>
+                    </div>}
+
+                    <div className="mt-6 flex flex-wrap gap-4">
+                      {project.caseStudyUrl && <a href={project.caseStudyUrl} className="text-sm font-bold text-emerald-400 hover:text-emerald-300">View case study <span aria-hidden="true">→</span></a>}
+                      {project.liveUrl && <a href={project.liveUrl} target="_blank" rel="noreferrer" className="text-sm font-bold text-emerald-400 hover:text-emerald-300">Visit live product <span aria-hidden="true">↗</span></a>}
+                    </div>
                   </div>
-                </div>
+                ) : null}
               </div>
             </article>
           ))}

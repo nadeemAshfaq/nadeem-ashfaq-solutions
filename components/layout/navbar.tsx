@@ -35,15 +35,13 @@ export function Navbar() {
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-sm font-black text-white shadow-md shadow-emerald-500/25 transition-transform duration-200 group-hover:scale-105">
-            N
-          </span>
+          <span aria-hidden="true" className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 shadow-md shadow-emerald-500/25 transition-transform duration-200 group-hover:scale-105" />
           <div className="flex flex-col">
             <span className="text-base font-bold text-white transition-colors group-hover:text-emerald-300">
               {siteConfig.name}
             </span>
             <span className="hidden text-[10px] font-semibold uppercase tracking-wider text-emerald-400 sm:block">
-              M365 · Google Workspace · Full-Stack · AI
+              · Microsoft 365 · Google Workspace · Full-Stack · AI
             </span>
           </div>
         </Link>

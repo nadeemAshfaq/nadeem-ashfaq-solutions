@@ -35,6 +35,7 @@ export const skillCategories: SkillCategory[] = [
       "React",
       "Next.js",
       "TypeScript",
+      "Python",
       "Node.js",
       ".NET",
       "REST APIs",
@@ -45,6 +46,7 @@ export const skillCategories: SkillCategory[] = [
     title: "AI & Automation",
     items: [
       "OpenAI",
+      "Python",
       "LLMs",
       "RAG Architecture",
       "AI Agents",
@@ -96,9 +98,10 @@ export const projects: Project[] = [
     techStack: ["SharePoint", "SPFx", "Power Automate", "Entra ID"]
   },
   {
-    title: "SocialAgent",
-    description: "Autonomous AI-powered social media content generation and scheduling engine utilizing LLM agents and multi-channel APIs.",
-    techStack: ["AI Agents", "Node.js", "Social APIs", "SaaS"]
+    title: "Social Agent — AI Social Media Content Planning Platform",
+    description: "A platform for AI-assisted market research, content planning and generation, review, approvals, and publishing workflows.",
+    techStack: [],
+    liveUrl: "https://socialagent.pro/"
   },
   {
     title: "Enterprise AI & Business Automation",
