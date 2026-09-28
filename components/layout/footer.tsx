@@ -14,7 +14,7 @@ export function Footer() {
           {/* Brand */}
           <div className="space-y-3 sm:col-span-2 lg:col-span-1">
             <div className="flex items-center gap-3">
-              <span aria-hidden="true" className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 shadow-md shadow-emerald-500/20" />
+              <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-xs font-extrabold text-white shadow-md shadow-emerald-500/20">NA</span>
               <span className="text-base font-bold text-white">{siteConfig.name}</span>
             </div>
             <p className="text-sm font-semibold text-emerald-400">{siteConfig.role}</p>

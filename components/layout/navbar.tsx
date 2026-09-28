@@ -25,9 +25,7 @@ export function Navbar() {
           : "border-b border-slate-800/40 bg-slate-950/75 backdrop-blur-sm"
       }`}
     >
-      {/* Microsoft 4-Color Accent Strip */}
-      <div className="h-1 w-full bg-gradient-to-r from-[#f25022] via-[#ffb900] via-[#7fba00] via-[#00a4ef] to-[#7719aa]" />
-
+    
       <nav className="flex w-full items-center justify-between px-6 py-3.5 sm:px-10 lg:px-14 xl:px-16 2xl:px-20">
         {/* Brand Logo */}
         <Link
@@ -35,7 +33,7 @@ export function Navbar() {
           className="group flex items-center gap-3"
           onClick={() => setMenuOpen(false)}
         >
-          <span aria-hidden="true" className="h-9 w-9 rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 shadow-md shadow-emerald-500/25 transition-transform duration-200 group-hover:scale-105" />
+          <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-500 to-blue-600 text-xs font-extrabold text-white shadow-md shadow-emerald-500/25 transition-transform duration-200 group-hover:scale-105">NA</span>
           <div className="flex flex-col">
             <span className="text-base font-bold text-white transition-colors group-hover:text-emerald-300">
               {siteConfig.name}
@@ -106,6 +104,9 @@ export function Navbar() {
           </button>
         </div>
       </nav>
+        {/* Microsoft 4-Color Accent Strip */}
+      <div className="h-1 w-full bg-gradient-to-r from-[#f25022] via-[#ffb900] via-[#7fba00] via-[#00a4ef] to-[#7719aa]" />
+
 
       {/* Mobile Drawer */}
       <div
