@@ -110,9 +110,9 @@ export default function SocialAgentProjectPage() {
           </ul>
         </nav>
 
-        <section aria-labelledby="socialagent-cta" className="mt-16 rounded-3xl border border-emerald-500/30 bg-slate-900 p-8 sm:p-12">
+        <section aria-labelledby="socialagent-cta" className="mt-16 rounded-3xl border border-emerald-500/30 bg-slate-900 p-8 text-center sm:p-12">
           <h2 id="socialagent-cta" className="text-2xl font-extrabold text-white sm:text-3xl">Building an AI-powered product or workflow?</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">Let’s discuss the product requirements, systems, and integrations involved.</p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">Let’s discuss the product requirements, systems, and integrations involved.</p>
           <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-500">
             Discuss a project <span aria-hidden="true">→</span>
           </Link>

@@ -117,14 +117,14 @@ export default function ServicesPage() {
           </ul>
         </section>
 
-        <section aria-labelledby="services-cta" className="mt-20 rounded-3xl border border-emerald-500/30 bg-slate-900 p-8 sm:p-12">
-          <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
+        <section aria-labelledby="services-cta" className="mt-20 rounded-3xl border border-emerald-500/30 bg-slate-900 p-8 text-center sm:p-12">
+          <div className="mx-auto flex max-w-3xl flex-col items-center gap-6">
             <div>
               <h2 id="services-cta" className="text-2xl font-extrabold text-white sm:text-3xl">Have a project in mind?</h2>
-              <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">Share the business need, the systems involved, and what you want to improve. We can discuss a suitable technical approach.</p>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">Share the business need, the systems involved, and what you want to improve. We can discuss a suitable technical approach.</p>
             </div>
-            <Link href="/contact" className="inline-flex shrink-0 items-center gap-2 self-center rounded-full bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-500 sm:self-auto">
-            Discuss a project <span aria-hidden="true">→</span>
+            <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-500">
+              Discuss a project <span aria-hidden="true">→</span>
             </Link>
           </div>
         </section>

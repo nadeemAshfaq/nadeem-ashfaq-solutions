@@ -249,9 +249,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </nav>
         )}
 
-        <section aria-labelledby="service-cta" className="mt-16 rounded-3xl border border-emerald-500/30 bg-slate-900 p-8 sm:p-12">
+        <section aria-labelledby="service-cta" className="mt-16 rounded-3xl border border-emerald-500/30 bg-slate-900 p-8 text-center sm:p-12">
           <h2 id="service-cta" className="text-2xl font-extrabold text-white sm:text-3xl">{service.ctaTitle}</h2>
-          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">{service.ctaDescription}</p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">{service.ctaDescription}</p>
           <Link href="/contact" className="mt-6 inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-500">
             Start a conversation <span aria-hidden="true">→</span>
           </Link>
