@@ -349,23 +349,6 @@ export default function Home() {
               </div>
             </div>
 
-            {/* Floating Badge: Microsoft 365 */}
-            <div className="absolute -right-3 top-6 flex items-center gap-2 rounded-xl border border-blue-500/40 bg-slate-900/95 px-3 py-2 shadow-xl backdrop-blur-md">
-              <span aria-hidden="true" className="h-5 w-5 rounded bg-[#0078d4] shadow-sm" />
-              <span className="text-xs font-bold text-white">Microsoft 365</span>
-            </div>
-
-            {/* Floating Badge: Google Workspace */}
-            <div className="absolute -left-3 top-28 flex items-center gap-2 rounded-xl border border-amber-500/40 bg-slate-900/95 px-3 py-2 shadow-xl backdrop-blur-md">
-              <span aria-hidden="true" className="h-5 w-5 rounded bg-amber-500 shadow-sm" />
-              <span className="text-xs font-bold text-white">Google Workspace</span>
-            </div>
-
-            {/* Floating Badge: AI Automation */}
-            <div className="absolute -right-3 bottom-24 flex items-center gap-2 rounded-xl border border-emerald-500/40 bg-slate-900/95 px-3 py-2 shadow-xl backdrop-blur-md">
-              <span aria-hidden="true" className="h-5 w-5 rounded bg-emerald-500 shadow-sm" />
-              <span className="text-xs font-bold text-white">AI Automation</span>
-            </div>
           </div>
         </div>
       </section>
