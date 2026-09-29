@@ -145,6 +145,44 @@ const homepageProjects: HomepageProject[] = [
   }
 ];
 
+const clientTestimonials = [
+  {
+    client: "Kilelrono",
+    service: "Microsoft Office Add-in Development — Outlook & Word",
+    quote:
+      "Nadeem Ashfaq did an outstanding job developing custom add-ins for Outlook and Word. Office add-in development can be notoriously tricky with manifest configurations and cross-client compatibility (web vs. desktop), but he handled it effortlessly. He delivered clean, well-documented code, integrated our required APIs seamlessly and communicated clearly throughout the process. Highly recommend Nadeem for any Office.js or Microsoft ecosystem development.",
+    rating: "5.0 / 5.0"
+  },
+  {
+    client: "Elz",
+    service: "Outlook Add-in Development & API Integration — Germany",
+    quote:
+      "I enjoyed working with Nadeem. He found good solutions, communicated well and finished the project successfully. I will work again with Nadeem.",
+    rating: "5.0 / 5.0"
+  },
+  {
+    client: "Word Add-in Client",
+    service: "Microsoft Word Add-in Development",
+    quote:
+      "Great job. I had a great experience working with this freelancer. I will be doing more work with him in future.",
+    rating: "5.0 / 5.0"
+  },
+  {
+    client: "Private Client",
+    service: "Custom Development Project",
+    quote:
+      "Good guy and a pleasure to deal with. I had to pull out of the project as my plans had changed and the project was no longer required. He gave me all the files and refunded all the money too.",
+    rating: "5.0 / 5.0"
+  },
+  {
+    client: "Xfinitive",
+    service: "AskX & SocialAgent — AI SaaS Product Development",
+    quote:
+      "Nadeem has been an integral part of our product development, contributing across the frontend, backend, AI integrations, and overall product architecture. He understands complex requirements quickly and consistently turns them into practical, production-ready solutions.",
+    rating: "Full-Stack Development · AI · SaaS · Product Engineering"
+  }
+];
+
 export default function Home() {
   const homepageServices = [...servicePagesData]
     .filter((service) => homepageServiceOrder.includes(service.slug))
@@ -494,7 +532,42 @@ export default function Home() {
         </SectionContainer>
       </section>
 
-      {/* ── 5. Microsoft 365 and Google Workspace ── */}
+      {/* ── 5. What Clients Say ── */}
+      <section className="border-b border-slate-800/80 bg-slate-950/60 py-20 sm:py-24">
+        <SectionContainer id="client-testimonials">
+          <div className="mb-12">
+            <SectionHeading
+              eyebrow="What Clients Say"
+              title="Trusted by teams building products, workflows, and productivity tools"
+            />
+          </div>
+
+          <div className="grid gap-6 lg:grid-cols-2 xl:grid-cols-3">
+            {clientTestimonials.map((testimonial) => (
+              <article
+                key={`${testimonial.client}-${testimonial.service}`}
+                className="flex h-full flex-col rounded-3xl border border-slate-800 bg-slate-900/80 p-6 shadow-lg shadow-slate-950/20 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-500/40"
+              >
+                <div className="mb-5 flex items-center justify-between gap-3">
+                  <div>
+                    <h3 className="text-lg font-bold text-white">{testimonial.client}</h3>
+                    <p className="mt-1 text-xs font-medium uppercase tracking-[0.14em] text-emerald-400">{testimonial.service}</p>
+                  </div>
+                  <span aria-label="Client rating" className="rounded-full border border-amber-400/30 bg-amber-400/10 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.14em] text-amber-300">
+                    {testimonial.rating}
+                  </span>
+                </div>
+
+                <blockquote className="flex-1 text-sm leading-relaxed text-slate-300 before:content-['“'] before:text-emerald-400 before:mr-1 before:font-bold after:content-['”'] after:text-emerald-400 after:ml-1 after:font-bold">
+                  {testimonial.quote}
+                </blockquote>
+              </article>
+            ))}
+          </div>
+        </SectionContainer>
+      </section>
+
+      {/* ── 6. Microsoft 365 and Google Workspace ── */}
       <section className="border-b border-slate-800/80 py-20 sm:py-24">
         <SectionContainer id="productivity-platforms">
           <SectionHeading
