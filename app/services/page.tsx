@@ -121,7 +121,7 @@ export default function ServicesPage() {
           <div className="mx-auto flex max-w-3xl flex-col items-center gap-6">
             <div>
               <h2 id="services-cta" className="text-2xl font-extrabold text-white sm:text-3xl">Have a project in mind?</h2>
-              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">Share the business need, the systems involved, and what you want to improve. We can discuss a suitable technical approach.</p>
+              <p className="mx-auto mt-3 max-w-2xl text-sm leading-relaxed text-slate-300">Share the business need, the systems involved, and what you want to improve. I'll respond with the next steps and a suitable technical approach.</p>
             </div>
             <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-emerald-500">
               Discuss a project <span aria-hidden="true">→</span>

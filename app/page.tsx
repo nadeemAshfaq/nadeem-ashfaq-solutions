@@ -60,6 +60,24 @@ const expertiseGroups = [
 const pageTitle = `${siteConfig.name} | Full-Stack Developer & Microsoft 365 Solutions Architect`;
 const pageDescription =
   "Full-stack development and solutions architecture across Microsoft 365, Copilot, Dynamics 365 integrations, Python, Google Workspace, AI, WhatsApp workflows, browser extensions, and SaaS.";
+const homepageSkills = [
+  "Microsoft 365 Development",
+  "Microsoft Graph API",
+  "Office Add-ins (Office.js)",
+  "SharePoint Framework (SPFx)",
+  "Microsoft Entra ID",
+  "Power Platform",
+  "Google Workspace Add-ons",
+  "Full-Stack Web Development",
+  "AI/LLM Integrations"
+];
+const homepageSchemaImage = new URL("/opengraph-image", siteUrl).toString();
+const homepageProfileLinks = [
+  "https://www.linkedin.com/in/nadeem-ashfaq-3274a7264/",
+  "https://www.upwork.com/freelancers/nadeema59",
+  "https://www.fiverr.com/nadeem141117",
+  "https://github.com/nadeemashfaq"
+];
 
 export const metadata: Metadata = {
   title: pageTitle,
@@ -139,14 +157,64 @@ export default function Home() {
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
-            "@type": "WebPage",
-            "@id": `${siteUrl}/#webpage`,
-            url: siteUrl,
-            name: pageTitle,
-            description: pageDescription,
-            isPartOf: { "@id": `${siteUrl}/#website` },
-            about: { "@id": `${siteUrl}/#person` },
-            mainEntity: { "@id": `${siteUrl}/#person` }
+            "@graph": [
+              {
+                "@type": "Person",
+                "@id": `${siteUrl}/#person`,
+                name: siteConfig.name,
+                jobTitle: siteConfig.role,
+                description: siteConfig.description,
+                url: siteUrl,
+                image: homepageSchemaImage,
+                sameAs: homepageProfileLinks,
+                areaServed: "Worldwide",
+                knowsAbout: homepageSkills
+              },
+              {
+                "@type": "WebSite",
+                "@id": `${siteUrl}/#website`,
+                url: siteUrl,
+                name: siteConfig.name,
+                description: siteConfig.headline,
+                publisher: { "@id": `${siteUrl}/#person` }
+              },
+              {
+                "@type": "ProfessionalService",
+                "@id": `${siteUrl}/#professional-service`,
+                name: siteConfig.name,
+                url: siteUrl,
+                description: siteConfig.description,
+                email: siteConfig.email,
+                image: homepageSchemaImage,
+                sameAs: homepageProfileLinks,
+                areaServed: "Worldwide",
+                founder: { "@id": `${siteUrl}/#person` },
+                knowsAbout: homepageSkills,
+                hasOfferCatalog: {
+                  "@type": "OfferCatalog",
+                  name: "Professional Services",
+                  itemListElement: servicePagesData.map((service) => ({
+                    "@type": "Offer",
+                    itemOffered: {
+                      "@type": "Service",
+                      name: service.title,
+                      description: service.shortDescription,
+                      url: `${siteUrl}/services/${service.slug}`
+                    }
+                  }))
+                }
+              },
+              {
+                "@type": "WebPage",
+                "@id": `${siteUrl}/#webpage`,
+                url: siteUrl,
+                name: pageTitle,
+                description: pageDescription,
+                isPartOf: { "@id": `${siteUrl}/#website` },
+                about: { "@id": `${siteUrl}/#person` },
+                mainEntity: { "@id": `${siteUrl}/#person` }
+              }
+            ]
           }).replace(/</g, "\\u003c")
         }}
       />

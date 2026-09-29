@@ -18,7 +18,7 @@ export const siteConfig = {
   )}`,
   profiles: [
     { label: "Upwork", url: "https://www.upwork.com/freelancers/nadeema59" },
-    { label: "Fiverr", url: "https://www.fiverr.com/users/nadeem141117/seller_dashboard" },
+    { label: "Fiverr", url: "https://www.fiverr.com/nadeem141117" },
     { label: "LinkedIn", url: "https://www.linkedin.com/in/nadeem-ashfaq-3274a7264/" }
   ],
   stats: [

@@ -16,6 +16,8 @@ export type ServicePageContent = {
   overview: string;
   icon: string;
   accentColor: string;
+  quickAnswer?: string;
+  pricingNote?: string;
   whatIBuild: string[];
   capabilities: string[];
   whoFor: string[];
@@ -95,7 +97,7 @@ const coreServicePagesData: ServicePageContent[] = [
       { question: "Can you build both the frontend and backend?", answer: "Yes. The work can cover frontend interfaces, backend services, databases, APIs, authentication, and deployment as needed." }
     ],
     ctaTitle: "Planning a web application or SaaS product?",
-    ctaDescription: "Share the product goal, current systems, and technical constraints. We can discuss a practical full-stack approach."
+    ctaDescription: "Share the product goal, current systems, and technical constraints, and I'll respond with next steps."
   },
   {
     slug: "microsoft-365-development",
@@ -110,6 +112,10 @@ const coreServicePagesData: ServicePageContent[] = [
       "I build applications and integrations around the Microsoft 365 ecosystem. Solutions can connect SharePoint, Office, Teams, Microsoft Graph, identity, and Power Platform with existing business applications and workflows.",
     icon: "🪟",
     accentColor: "border-blue-500/40 text-blue-400 bg-blue-500/10",
+    quickAnswer:
+      "Microsoft 365 development means building custom apps and integrations on Microsoft Graph, SharePoint, Teams, Office Add-ins, and Entra ID. I build these for SaaS products and businesses, including SSO, Graph API integrations, SPFx web parts, and Office Add-ins for Word, Excel, Outlook, and PowerPoint. Typical projects take 2-6 weeks depending on scope and integration complexity.",
+    pricingNote:
+      "Typical delivery guidance: Office Add-in MVP 3-6 weeks, Graph integration for an existing SaaS 2-4 weeks, and SharePoint or Teams workflow projects 2-8 weeks depending on complexity. Pricing typically starts from project-based scoping and can be tailored to the required architecture, security, and rollout plan.",
     whatIBuild: [
       "Microsoft Graph integrations",
       "SharePoint solutions",
@@ -142,14 +148,19 @@ const coreServicePagesData: ServicePageContent[] = [
     relatedServices: ["microsoft-copilot-development", "dynamics-365-development", "sharepoint-spfx-development", "office-add-in-development", "power-platform-development", "api-integration"],
     relevantWork: [],
     faqs: [
-      { question: "What is Microsoft 365 development?", answer: "Microsoft 365 development means building applications, extensions, and integrations that work with services such as SharePoint, Office, Teams, and Microsoft Graph." },
-      { question: "Can you integrate Microsoft Graph with a custom application?", answer: "Yes. A custom application can use Microsoft Graph for supported Microsoft 365 data and actions, subject to the required permissions, user consent, and API availability." },
-      { question: "Can you build Microsoft 365 integrations for an existing SaaS product?", answer: "Yes. Microsoft 365 capabilities can be connected to an existing SaaS product through supported APIs and identity flows, with scope based on the product and tenant requirements." },
-      { question: "Can you implement Microsoft Entra ID authentication?", answer: "Authentication can be implemented using Microsoft Entra ID and MSAL, with delegated or application permissions selected for the application’s access needs." },
-      { question: "Can Microsoft 365 connect with external business systems?", answer: "Yes. Microsoft 365 services can be integrated with external applications and APIs when supported by the relevant API, permissions, and security requirements." }
+      { question: "What is Microsoft 365 development?", answer: "Microsoft 365 development involves building solutions on top of the Microsoft 365 platform, including Microsoft Graph, SharePoint, Teams, Office clients, and Entra ID. These projects often connect business data and workflows into the tools an organization already uses every day." },
+      { question: "Can you integrate Microsoft Graph with a custom application?", answer: "Yes. A SaaS or custom app can call Microsoft Graph endpoints such as /me/messages, /me/calendar/events, and /drives using MSAL for sign-in. Delegated permissions (for example Mail.Read or Files.ReadWrite) act on behalf of a signed-in user. Application permissions access tenant-wide data and require admin consent." },
+      { question: "How much does Microsoft 365 development cost?", answer: "Cost depends on the scope, app type, identity model, and integrations involved. A simple Office Add-in or light Graph integration may be a small project, while multi-tenant SaaS work, custom UI, or enterprise security review will cost more. Most projects are scoped with a phased MVP first." },
+      { question: "How long does an Office Add-in or Graph integration take?", answer: "A focused Office Add-in MVP usually takes 3 to 6 weeks. A Microsoft Graph integration for an existing SaaS or internal app often takes 2 to 4 weeks if requirements are clear. Complex approval flows, tenant configuration, or multi-app planning can extend the timeline." },
+      { question: "Should I build an Office Add-in, a Teams app, or an SPFx web part?", answer: "Use an Office Add-in when the workflow belongs inside Word, Excel, Outlook, or PowerPoint. Choose a Teams app when the experience should live inside collaboration and chat workflows. Select SPFx when the requirement belongs in SharePoint and intranet or portal scenarios. The best option depends on the user journey and where the work happens." },
+      { question: "What is the difference between delegated and application permissions in Microsoft Graph?", answer: "Delegated permissions act on behalf of a signed-in user and respect their rights and consent. Application permissions are tenant-wide and are used by background services or daemon-style integrations that do not represent a specific user. Application permissions usually require admin consent and a stronger governance model." },
+      { question: "Do you support multi-tenant apps and AppSource publishing?", answer: "Yes. Multi-tenant design can be planned for SaaS and Microsoft ecosystem integrations, with careful attention to consent, tenant isolation, security, and admin setup. AppSource publishing is possible when a solution is built to meet Microsoft’s technical and compliance requirements for the chosen deployment model." },
+      { question: "Can you migrate or modernize existing SharePoint solutions to SPFx?", answer: "Yes. Existing SharePoint customizations and older solutions can be reviewed for modernization opportunities, especially where the goal is a more maintainable React-based client experience, better UX, and cleaner Microsoft 365 integration points. The right migration path depends on current architecture and business need." },
+      { question: "Can you build Microsoft 365 integrations for an existing SaaS product?", answer: "Yes. I can connect an existing SaaS or business platform to Microsoft 365 services through supported APIs, identity flows, and integration architecture choices. This often involves Microsoft Graph, Entra ID, Office clients, or SharePoint depending on the workflow being extended." },
+      { question: "Can Microsoft 365 connect with external business systems?", answer: "Yes. Microsoft 365 services can be connected to external systems through APIs, event-driven workflows, and identity-based integrations. The final design depends on the security model, required permissions, data sensitivity, and the systems already operating in the business." }
     ],
     ctaTitle: "Need a Microsoft 365 solution around an existing workflow?",
-    ctaDescription: "Describe the Microsoft 365 services, users, and business systems involved, and we can discuss the integration requirements."
+    ctaDescription: "Describe the Microsoft 365 services, users, and business systems involved, and I'll respond with next steps."
   },
   {
     slug: "sharepoint-spfx-development",
@@ -202,7 +213,7 @@ const coreServicePagesData: ServicePageContent[] = [
       { question: "Do SPFx solutions work with modern SharePoint?", answer: "SPFx is designed for modern SharePoint experiences. Specific features and deployment behavior should be checked against the target tenant and requirements." }
     ],
     ctaTitle: "Planning a SharePoint or SPFx solution?",
-    ctaDescription: "Share your SharePoint environment, users, and workflow needs so we can identify the right extension or integration approach."
+    ctaDescription: "Share your SharePoint environment, users, and workflow needs so I can identify the right extension or integration approach."
   },
   {
     slug: "office-add-in-development",
@@ -368,7 +379,7 @@ const coreServicePagesData: ServicePageContent[] = [
       { question: "Can you work with an existing Power Platform application?", answer: "Yes. Existing apps and flows can be reviewed and extended based on their environment, data model, connectors, and requirements." }
     ],
     ctaTitle: "Need a Power App or automated workflow?",
-    ctaDescription: "Share the current process, data sources, users, and environment constraints so we can scope a suitable Power Platform solution."
+    ctaDescription: "Share the current process, data sources, users, and environment constraints so I can scope a suitable Power Platform solution."
   },
   {
     slug: "ai-development",
@@ -481,7 +492,7 @@ const coreServicePagesData: ServicePageContent[] = [
       { question: "Can webhooks support near-real-time synchronization?", answer: "Webhooks can notify an application when supported events occur, allowing it to process changes without constant polling. Delivery guarantees and retry behavior depend on the source system." }
     ],
     ctaTitle: "Need two systems to work together?",
-    ctaDescription: "Share the systems, data that needs to move, and how current workflows behave. We can map an integration approach and its constraints."
+    ctaDescription: "Share the systems, data that needs to move, and how current workflows behave. I can map an integration approach and its constraints."
   }
 ];
 

@@ -50,7 +50,7 @@ export const additionalServicePagesData: ServicePageContent[] = [
       { question: "Can Copilot-related solutions connect with external systems?", answer: "External systems can be connected through supported APIs or integration services when the selected Copilot experience allows it and authentication, permissions, and data handling are addressed." }
     ],
     ctaTitle: "Exploring a Copilot integration?",
-    ctaDescription: "Share the Copilot experience, business data, tenant requirements, and workflow you want to connect so we can assess the available options."
+    ctaDescription: "Share the Copilot experience, business data, tenant requirements, and workflow you want to connect so I can assess the available options."
   },
   {
     slug: "dynamics-365-development",

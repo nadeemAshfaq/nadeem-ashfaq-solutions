@@ -68,6 +68,10 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
         "@type": "Service",
         "@id": `${siteUrl}/services/${service.slug}#service`,
         name: service.title,
+        serviceType: service.slug === "microsoft-365-development"
+          ? "Microsoft 365 application and integration development"
+          : "Custom software and integration services",
+        areaServed: "Worldwide",
         description: service.seoDescription,
         url: `${siteUrl}/services/${service.slug}`,
         provider: { "@id": `${siteUrl}/#professional-service` }
@@ -91,7 +95,9 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
             }))
           }]
         : [])
-    ]
+    ],
+    datePublished: "2026-09-29",
+    dateModified: "2026-09-29"
   };
 
   return (
@@ -117,9 +123,22 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           <h1 className="mt-2 max-w-4xl text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
             {service.pageHeading}
           </h1>
+          {service.quickAnswer && (
+            <p className="mt-5 max-w-4xl rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4 text-sm leading-relaxed text-slate-200 sm:text-base">
+              {service.quickAnswer}
+            </p>
+          )}
           <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-200 sm:text-lg">
             {service.overview}
           </p>
+          <p className="mt-4 text-xs font-semibold uppercase tracking-[0.18em] text-slate-400">
+            Last updated: 29 September 2026
+          </p>
+          {service.pricingNote && (
+            <div className="mt-6 max-w-3xl rounded-2xl border border-sky-500/30 bg-sky-500/5 p-4 text-sm leading-relaxed text-slate-200">
+              {service.pricingNote}
+            </div>
+          )}
           <div className="mt-8 flex flex-wrap gap-4">
             <Link href="/contact" className="inline-flex items-center gap-2 rounded-full bg-emerald-600 px-7 py-3.5 text-sm font-bold text-white transition-colors hover:bg-emerald-500">
               Discuss your requirements <span aria-hidden="true">→</span>
@@ -165,16 +184,62 @@ export default async function ServiceDetailPage({ params }: ServicePageProps) {
           </section>
         )}
 
-        <section aria-labelledby="who-this-is-for" className="mt-16 grid gap-10 lg:grid-cols-[0.8fr_1.2fr]">
-          <div>
-            <h2 id="who-this-is-for" className="text-2xl font-bold text-white sm:text-3xl">Who This Is For</h2>
-            <p className="mt-3 text-sm leading-relaxed text-slate-300">This service can fit teams with needs such as:</p>
+        {service.slug === "microsoft-365-development" && (
+          <section aria-labelledby="choosing-an-approach" className="mt-16">
+            <h2 id="choosing-an-approach" className="text-2xl font-bold text-white sm:text-3xl">Choosing an Approach</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+              <article className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+                <h3 className="text-lg font-bold text-white">Office Add-in</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">Best when the task belongs inside Word, Excel, Outlook, or PowerPoint and the user needs the tool embedded where they already work.</p>
+              </article>
+              <article className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+                <h3 className="text-lg font-bold text-white">Teams app</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">Best for workflows that happen inside collaboration, chat, approvals, and cross-team communication patterns.</p>
+              </article>
+              <article className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+                <h3 className="text-lg font-bold text-white">SPFx web part</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">Best when the experience belongs in SharePoint Online, intranet pages, and structured business portals.</p>
+              </article>
+              <article className="rounded-2xl border border-slate-800 bg-slate-900/70 p-5">
+                <h3 className="text-lg font-bold text-white">Permissions model</h3>
+                <p className="mt-2 text-sm leading-relaxed text-slate-300">Delegated permissions work for signed-in users; application permissions are for service-to-service access and require stronger review.</p>
+              </article>
+            </div>
+          </section>
+        )}
+
+        <section aria-labelledby="who-this-is-for" className="mt-16 overflow-hidden rounded-3xl border border-slate-800 bg-slate-900/70 p-6 sm:p-8">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-start">
+            <div className="lg:w-[34%]">
+              <span className="inline-flex items-center rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] text-emerald-300">
+                Ideal fit
+              </span>
+              <h2 id="who-this-is-for" className="mt-4 text-2xl font-bold text-white sm:text-3xl">Who This Is For</h2>
+              <p className="mt-3 text-sm leading-relaxed text-slate-300">
+                This service is designed for teams and founders who need a clear, reliable technical partner without the overhead of a full in-house team.
+              </p>
+              {/* <div className="mt-5 rounded-2xl border border-emerald-500/20 bg-emerald-500/5 p-4">
+                <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-300">Best fit when</p>
+                <p className="mt-2 text-sm leading-relaxed text-slate-200">
+                  You want the work to move quickly, the product to stay practical, and the technical decisions to support real business growth.
+                </p>
+              </div> */}
+            </div>
+
+            <ul className="grid flex-1 gap-3 sm:grid-cols-2">
+              {service.whoFor.map((item) => (
+                <li
+                  key={item}
+                  className="group flex items-start gap-3 rounded-2xl border border-slate-800 bg-slate-950/70 p-4 text-sm text-slate-200 transition-colors duration-200 hover:border-emerald-500/40 hover:bg-slate-900"
+                >
+                  <span aria-hidden="true" className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-emerald-500/30 bg-emerald-500/10 text-base font-bold text-emerald-300">
+                    ✓
+                  </span>
+                  <span className="leading-relaxed">{item}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          <ul className="grid gap-3 sm:grid-cols-2">
-            {service.whoFor.map((item) => (
-              <li key={item} className="rounded-xl border border-slate-800 bg-slate-900/70 p-4 text-sm text-slate-200">{item}</li>
-            ))}
-          </ul>
         </section>
 
         <section aria-labelledby="technologies" className="mt-16">

@@ -84,6 +84,6 @@ export const homeFaqs: FAQItem[] = [
   {
     question: "How do we discuss a project?",
     answer:
-      "Use the contact page to share the goal, relevant systems, and constraints. We can then discuss scope and a suitable technical approach."
+      "Use the contact page to share the goal, relevant systems, and constraints. I'll respond with scope guidance and a suitable technical approach."
   }
 ];
